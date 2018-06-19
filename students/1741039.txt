@@ -1,0 +1,302 @@
+“Hello World!!”
+
+
+メモ
+
+function onEdit(){
+  var message = "";//出力する文字列
+  var time_and_place =[];
+  var Members = [];  
+  
+  for(; DATE_COLUMN <= sheet.getLastColumn(); DATE_COLUMN++){
+    Members =  [
+      ["S", []],//Sのオブジェクト({名前, 出欠, 備考})を格納する配列
+      ["A", []],//Aのオブジェクト({名前, 出欠, 備考})を格納する配列
+      ["T", []],//Tのオブジェクト({名前, 出欠, 備考})を格納する配列
+      ["B", []]//Bのオブジェクト({名前, 出欠, 備考})を格納する配列
+    ];
+
+    message ="";//初期化
+    setData();
+    var attend_data = [];//各出欠状況の人数を状態名とともに格納([S, A, T, B]の順に[出席, 欠席, 遅刻, 早退, 未定, 不明])    
+    setAttendData();  
+    //日時場所を表示
+    message += time_and_place[0]+"月"+
+      time_and_place[1]+"日"+
+        "("+time_and_place[2]+")"+//曜日
+          time_and_place[4]+"n"+//時間
+            time_and_place[7]+//備考
+            "＠"+time_and_place[PLACE_ROW-1]+"n"+//場所
+              time_and_place[5] + "開場、" + time_and_place[6] + "撤退n";//開場時間、撤退時間
+    
+    var date_and_time ="";
+    date_and_time += time_and_place[0]+"月"+
+      time_and_place[1]+"日"+
+        "("+time_and_place[2]+")"+//曜日
+          time_and_place[4];//時間
+    sheet.getRange(sheet.getLastRow()-1,DATE_COLUMN).setValue(date_and_time);
+    
+    var i = 0;
+    if(time_and_place[7][i].indexOf("男声")!=-1){//備考に"男声"が含まれる場合
+      outputMaker_all(2,3);
+      outputMaker_conductor();
+      outputMaker(2,3);
+    }else if(time_and_place[7][i].indexOf("女声")!=-1){//備考に"女声"が含まれる場合
+      outputMaker_all(0,1);
+      outputMaker_conductor();
+      outputMaker(0,1);
+    }else{//それ以外(全体練習)
+      outputMaker_all(0,3);
+      outputMaker_conductor();
+      outputMaker(0,3);
+    }
+    i++;
+
+    sheet.getRange(sheet.getLastRow(),DATE_COLUMN).setValue(message);//各練習日の最終行に記述
+  }
+
+  /*********************************************/  
+
+  //名前・パート・出欠・備考を配列S-Bに格納
+  function setData(){
+    
+    //sheetから8行目以降の名前・パート・出欠・備考をそれぞれ配列全て格納
+    var temp_name = [];
+    var temp_part = [];
+    var temp_lname = [];
+    var temp_at_and_rm = [];
+    temp_name = sheet.getRange(BEGIN_ROW, NAME_COLUMN, LAST_ROW-BEGIN_ROW+1).getValues();//名前の列を配列に格納
+    temp_part = sheet.getRange(BEGIN_ROW, PART_COLUMN, LAST_ROW-BEGIN_ROW+1).getValues();//パートの列を配列に格納
+    temp_lname = sheet.getRange(BEGIN_ROW, LNAME_COLUMN, LAST_ROW-BEGIN_ROW+1).getValues();//苗字数の列を配列に格納
+    temp_at_and_rm = sheet.getRange(BEGIN_ROW, DATE_COLUMN, LAST_ROW-BEGIN_ROW+2).getValues();//出欠・備考の列を配列に格納
+    
+    
+    //日付・時間・場所を格納
+    time_and_place = sheet.getRange(MONTH_ROW, DATE_COLUMN,8).getValues();//月・日・曜日・場所・時間・備考を格納
+    if(time_and_place[4]==""){//時間の欄が空欄だったら
+      time_and_place[4] = "18:00-";//「18時から」と記載
+    }
+       
+       
+    //各配列の未定義値を含む配列を除いてオブジェクトを作成し、配列に格納
+    for(var i = 0; i < temp_name.length; i++){
+      if(temp_name[i] != ""){//名前が空欄でなければ
+        for(var l=0;l<4;l++){
+          if(temp_part[i] == Members[l][0]){//パートひとつひとつに対して
+            if(String(temp_at_and_rm[i+1]).replace(/[^0-9]/g, '') == ""){//備考に時刻が含まれていなければ
+              var ratetime = [9999];//9999を入れる
+            }else{//それ以外は
+              var ratetime = [String(temp_at_and_rm[i+1]).replace(/[^0-9]/g, '')];//時刻を入れる
+            }
+            Members[l][1].push({//オブジェクト{名前,出欠,備考}をMembers[0]から[3]の[1]に格納
+              name:temp_name[i][0].slice(0,temp_lname[i] != "" ? temp_lname[i] : 2), //名前の先頭から苗字数だけnameに格納
+              attend:temp_at_and_rm[i], 
+              remark:temp_at_and_rm[i+1],
+              time:ratetime
+            });
+            break;
+          }
+        }
+      }
+    }
+    //時間の順にソート
+    for(var l=0;l<4;l++){
+      Members[l][1].sort( function(a, b) {
+        return a.time < b.time ? -1 : 1; 
+      });
+    }
+  }
+
+  //出席データを格納
+  function setAttendData(){
+    for(var i=0;i<4;i++){//各パートにおいて
+      attend_data.push(
+        [
+          ["出席",countAttend(Members[i][1],"○"),[[],[]],"○"], 
+          ["欠席",countAttend(Members[i][1],"×"),[[],[]],"×"], 
+          ["遅刻",countAttend(Members[i][1],"△"),[[],[]],"△"], 
+          ["早退",countAttend(Members[i][1],"▽"),[[],[]],"▽"], 
+          ["未定",countAttend(Members[i][1],"？"),[[],[]],"？"], 
+          ["不明",countAttend(Members[i][1],""),[[],[]],""]
+        ]
+      );
+      for(var l=0;l<attend_data[i].length;l++){//各出欠状態において
+        for(var k=0;k<Members[i][1].length;k++){//各パートの団員の数だけ
+          if(Members[i][1][k].attend == attend_data[i][l][3]){
+            attend_data[i][l][2][0].push(Members[i][1][k].name);
+            attend_data[i][l][2][1].push(Members[i][1][k].remark);
+          }
+          //if(Members[i][1][k].attend != "○"|"×"|"△"|"▽"|"？"|""){
+          //  message += "不正な値が入力されています";
+          //}
+        }
+      }
+    }
+    
+    //各出欠状態の人数をカウント
+    function countAttend(prt, atd){
+      var l = 0;
+      for(var i = 0; i < prt.length; i++){
+        if(prt[i].attend == atd){
+          l++;
+        }
+      }
+      return l;
+    }
+  }
+    //全体の人数を出力
+  function outputMaker_all(first, last){
+    var sum_atd = 0;//出席or遅刻の人数
+    var sum_all = 0;//全体の人数
+    var sum_late = 0;//遅刻の人数
+    var sum_leave = 0;//早退の人数
+    var sum_null = 0;//不明の人数
+    
+    for(var part=first;part<=last;part++){//各パートについて
+      sum_atd += attend_data[part][0][1]+attend_data[part][2][1]+attend_data[part][3][1];
+      sum_all += Members[part][1].length;
+      sum_late　+= attend_data[part][2][1];
+      sum_leave　+= attend_data[part][3][1];
+      sum_null += attend_data[part][5][1];
+    }
+    message += "全体: "+sum_atd+"/"+sum_all;
+      message += "(";
+      if(sum_late != 0){
+        message += "遅刻" + sum_late + "名";
+      }
+      if(sum_leave != 0){
+        message += "早退" + sum_leave + "名";
+      }
+      if(sum_null != 0){
+        message += "不明" + sum_null + "名";
+      }
+      message += ")";
+    if(sum_late == 0 && sum_leave == 0 && sum_null == 0){
+      message = message.slice(0,-2);
+    }
+    message += "nn";
+  }
+  //指揮者の記述
+  function outputMaker_conductor(){
+    message += '指揮者n';
+    var conductor_attend = sheet.getRange(BEGIN_ROW,DATE_COLUMN).getValue();
+    Logger.log(conductor_attend);
+    switch (conductor_attend){
+      case '○':
+          message += '出席：' + conductor + 'nn';
+          break;
+      case '△':
+          message += '遅刻：' + conductor + '(' + sheet.getRange(BEGIN_ROW + 1,DATE_COLUMN).getValue() + ')nn';
+          break;
+      case '▽':
+          message += '早退：' + conductor + '(' + sheet.getRange(BEGIN_ROW + 1,DATE_COLUMN).getValue() + ')nn';
+          break;
+      case '×':
+          message += '欠席：' + conductor + '(' + sheet.getRange(BEGIN_ROW + 1,DATE_COLUMN).getValue() + ')nn';
+          break;
+      case '？':
+          message += '未定：' + conductor + 'nn';
+          break;
+    }
+  }
+  //メール文章を出力
+  function outputMaker(first, last){
+    for(var part=first;part<=last;part++){
+      message += Members[part][0]+" :"+(attend_data[part][0][1]+attend_data[part][2][1]+attend_data[part][3][1])+"/"+Members[part][1].length+output_uchi(part)+"n";
+      message += whoIsAttend(part);
+      message += "n";
+    }
+    function output_uchi(part){//文字列"(うち○○×名)"を返す
+      var ans ="うち";
+      
+      for(var i = 2;i <= 3;i++){//各パートにおける文字列"○○×名"を生成
+        if(attend_data[part][i][1] != 0){
+          ans += attend_data[part][i][0]+attend_data[part][i][1]+"名";
+        }
+      }
+      if(ans != "うち"){//遅刻等が1人以上いれば
+        return "("+ans+")";
+      }else{//1人もいなければ
+        return "";
+      }
+    }
+    //各出欠状態の人を出力
+    function whoIsAttend(part){
+      var ans ="";
+      for(var l=0;l<attend_data[part].length;l++){//状態の数だけ
+        if(l == 1){//以下"出席"→"遅刻"→"早退"→"欠席"の順で表示するための記述
+          wia(2);
+          wia(3)
+          wia(1);
+          l = 3;
+        }else{
+          wia(l);
+        }
+      }
+      return ans;
+      
+      function wia(l){
+        if(attend_data[part][l][2][0].length != 0){//各状態で1人以上いれば
+          ans += attend_data[part][l][0]+"：";//"○○："を
+          for(var i=0;i<attend_data[part][l][2][0].length;i++){//名前を列挙
+            ans += attend_data[part][l][2][0][i];
+            if((l != 0)&&(l != 5)){//出席、不明以外だったら備考を出力
+              if(attend_data[part][l][2][1][i] != ''){//備考欄に何かしらがあれば出力
+                ans += "("+attend_data[part][l][2][1][i]+")";
+              }
+            }
+            ans += "、";
+          }
+          ans = ans.slice(0,-1);//末尾の"、"を消去
+          ans += "n";
+        }
+      }
+    }
+  }
+}
+
+
+  /*********************************************/  
+
+
+//練習日2日前に自動で出欠メールを流す
+function sendMailAuto() {
+  var date = new Date();//今日の日付を取得
+  date.setDate(date.getDate() + 2);//2日後の日付
+  for(; DATE_COLUMN <= sheet.getLastColumn(); DATE_COLUMN++){//練習日の最初の列から最後の列まで繰り返す
+    var month_and_date = sheet.getRange(MONTH_ROW,DATE_COLUMN, 8).getValues();//月から練習概要までを配列に格納
+    if(month_and_date[0][0] == date.getMonth() + 1){//月が一致したら
+      if(month_and_date[1][0] == date.getDate()){//日が一致したら
+        var attend_table = sheet.getRange(sheet.getLastRow(),DATE_COLUMN).getValue();//最終行の表を取得
+        var title = month_and_date[0][0] + '月' + month_and_date[1][0] + '日' + month_and_date[7][0] + '出欠連絡 ';//件名
+        var content = month_and_date[0][0] + '月' + month_and_date[1][0] + '日(' + month_and_date[2][0] + ')' + month_and_date[4][0] + month_and_date[7][0] + 'の出欠連絡です。nこのメールは自動送信されています。nn' + attend_table + 'nn出欠変更は以下のフォームからn' + form_URL;
+        GmailApp.sendEmail(to_address, title, content , {
+          from:from_address,//送信元アドレス
+          htmlBody:content.replace(/r?n/g,'<br>'),//改行タグをhtmlに
+          name:from_name//送信者名
+        });//メールを送信
+        break;
+      }
+    }
+  }
+}
+
+
+//フォームの名前の選択肢を更新する
+function addListName(){
+  addListNameMaker(formid1);
+  //addListNameMaker(formid2);
+  function addListNameMaker(formid) {//フォームのidを変数とした関数
+    var form = FormApp.openById(formid);//idでフォームを開く
+    var name_form_list = form.getItems()[0].asListItem();//1つ目の設問を取得
+    var name_dat = sheet.getRange(BEGIN_ROW,NAME_COLUMN , LAST_ROW - BEGIN_ROW , 2 ).getValues();//パート、氏名を配列に格納
+    var name_dat_list = [];
+    var choices = [];
+    for (var i = 0 ; i < ( LAST_ROW - BEGIN_ROW ) / 2 ; i++ ){//人の数だけ
+      var h = i * 2
+      name_dat_list[i] = name_dat[h][1] + ' ' +  name_dat[h][0];//パート 氏名の順にして一次元配列に整理
+      choices[i] = name_form_list.createChoice(name_dat_list[i]);//上記配列を選択肢の配列に
+    }
+    name_form_list.setChoices(choices);//選択肢に設定
+  }
+}
