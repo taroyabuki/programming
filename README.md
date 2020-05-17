@@ -10,9 +10,13 @@
 
 教科書を買って損はないが，急いで買わずにようすを見てもいい．
 
-## 計画
+## 進め方
 
 大学のメアド（...@s.chibakoudai.jp）でGmailにログインした状態で，下の資料を開くこと．
+
+ウェブブラウザはChromeを使うことを推奨する．
+
+### 資料と報告締切
 
 回|日付|資料|報告締切
 -:|--|--|--
@@ -33,7 +37,3 @@
 
 [報告フォーム](https://docs.google.com/forms/d/e/1FAIpQLScaRQh28IXi-sBbT7rDxtPDhBjzHzCFSrZxiWFdjmU9NQV5Ww/viewform)を使う．
 このフォームが使えないときは，「taro.yabuki+programming@it-chiba.ac.jp」にメールを送る．
-
-## その他
-
-ウェブブラウザはChromeを使うことを推奨する．
