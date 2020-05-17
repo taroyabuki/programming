@@ -14,7 +14,7 @@
 
 回|日付|資料|報告締切
 -:|--|--|--
-1|5/18 or 5/21|[01.ipynb](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)|3日後の24:00
+1|5/18 or 5/21|[01.ipynb](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)|5日後の24:00
 2|5/25 or 5/28|
 3|6/1 or 6/4|
 4|6/8 or 6/11|
