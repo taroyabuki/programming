@@ -12,6 +12,8 @@
 
 ## 計画
 
+大学のメアド（...@s.chibakoudai.jp）でGmailにログインした状態で，下の資料を開くこと．
+
 回|日付|資料|報告締切
 -:|--|--|--
 1|5/18 or 5/21|[01.ipynb](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)|5日後の24:00
