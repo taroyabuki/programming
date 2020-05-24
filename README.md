@@ -12,6 +12,8 @@
 
 ## 進め方
 
+iPadだけでも受講できると思いますが，PCを使うことを推奨します．
+
 ウェブブラウザはChromeを使うことを推奨します．
 
 手順の3以降は1回目の資料で画像を使って説明しています．
@@ -23,14 +25,14 @@
 1. 作業する．
 1. 画面右上の「共有」をクリックする．
 1. 「・・・へのリンク権限を変更」をクリックし，「リンクを知っている全員」が閲覧できるようにする．
-1. 「リンクをコピー」をクリックし，コピーされたリンクを[報告フォーム](https://docs.google.com/forms/d/e/1FAIpQLScaRQh28IXi-sBbT7rDxtPDhBjzHzCFSrZxiWFdjmU9NQV5Ww/viewform)で報告する．
+1. 「リンクをコピー」をクリックし，コピーされたリンクを報告フォームで報告する．
 
 ### 資料と報告締切
 
 回|日付|資料|報告締切
 -:|--|--|--
 1|5/18 or 5/21|[01.ipynb](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)|5日後の24:00
-2|5/25 or 5/28|
+2|5/25 or 5/28|[02.ipynb](https://colab.research.google.com/drive/1zV_uo8dDyg5oWBTpz5s5eXICpLScSiK0?usp=sharing)|5日後の24:00
 3|6/1 or 6/4|
 4|6/8 or 6/11|
 5|6/15 or 6/18|
