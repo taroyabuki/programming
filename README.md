@@ -33,7 +33,7 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 -:|--|--|--
 1|5/18 or 5/21|[01.ipynb](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)|5日後の24:00
 2|5/25 or 5/28|[02.ipynb](https://colab.research.google.com/drive/1zV_uo8dDyg5oWBTpz5s5eXICpLScSiK0?usp=sharing)|5日後の24:00
-3|6/1 or 6/4|
+3|6/1 or 6/4|[03.ipynb](https://colab.research.google.com/drive/1czZ1YEcKpsYJN-FEeyUhsCQxDVSapdn_?usp=sharing)|**3日後の24:00**
 4|6/8 or 6/11|
 5|6/15 or 6/18|
 6|6/22 or 6/25|
@@ -49,8 +49,8 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 ## 質問・要望
 
 報告フォームを使ってください．
-このフォームが使えないときは，「taro.yabuki+programming@it-chiba.ac.jp」にメールを送ってください．
+フォームが使えないときは，「taro.yabuki+programming@it-chiba.ac.jp」にメールを送ってください．
 
 ### FAQ（よくある質問）
 
-* 映像はないのか．→文字で書いた方が正確だし効率的だと思います．でも，「どんなやつなのか顔が見たい」という要望については何か考えます．
+* 映像はないのか．→基本的には，文字で書いた方が正確だし効率的だと思います．とはいえ，文字ではわかりにくいだろうと思うところは，動画での説明を用意します．わかりにくかったところを「質問や要望」に具体的に書いてもらえれば，それについて説明する動画を作るかもしれません．
