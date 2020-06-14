@@ -26,6 +26,9 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 1. 画面右上の「共有」をクリックする．
 1. 「・・・へのリンク権限を変更」をクリックし，「リンクを知っている全員」が閲覧できるようにする．
 1. 「リンクをコピー」をクリックし，コピーされたリンクを報告フォームで報告する．
+1. 「完了」をクリックする．
+
+権限の設定方法は，[第1回の資料](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)にも書いてあります．
 
 ### 資料と報告締切
 
@@ -34,8 +37,8 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 1|5/18 or 5/21|[01.ipynb](https://colab.research.google.com/drive/1mNG9dF4ILqYT-SzNdz3xOr-sZXtpy-lS?usp=sharing)|5日後の24:00
 2|5/25 or 5/28|[02.ipynb](https://colab.research.google.com/drive/1zV_uo8dDyg5oWBTpz5s5eXICpLScSiK0?usp=sharing)|5日後の24:00
 3|6/1 or 6/4|[03.ipynb](https://colab.research.google.com/drive/1czZ1YEcKpsYJN-FEeyUhsCQxDVSapdn_?usp=sharing)|3日後の24:00
-4|6/8 or 6/11|[04.ipynb](https://colab.research.google.com/drive/1V-HM5cbvh9Be7tT3UHVyYi7IMWCrWKEf?usp=sharing)|**2日後の24:00**
-5|6/15 or 6/18|
+4|6/8 or 6/11|[04.ipynb](https://colab.research.google.com/drive/1V-HM5cbvh9Be7tT3UHVyYi7IMWCrWKEf?usp=sharing)|2日後の24:00
+5|6/15 or 6/18|[05.ipynb](https://colab.research.google.com/drive/13YjxEnOQeMa6AQ_BRtL_uwXwTIQ3OqJQ?usp=sharing)|**2日後の24:00**
 6|6/22 or 6/25|
 7|6/29 or 7/2|
 8|7/6 or 7/9|
@@ -48,7 +51,7 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 
 ## 質問・要望
 
-報告フォームを使ってください．
+報告フォームを使ってください（「わからなかった」では対応できないので，具体的に書いてください）．
 フォームが使えないときは，「taro.yabuki+programming@it-chiba.ac.jp」にメールを送ってください．
 
 ### FAQ（よくある質問）
