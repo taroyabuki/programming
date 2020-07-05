@@ -39,8 +39,8 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 4|6/8 or 6/11|[04.ipynb](https://colab.research.google.com/drive/1V-HM5cbvh9Be7tT3UHVyYi7IMWCrWKEf?usp=sharing)|2日後の24:00
 5|6/15 or 6/18|[05.ipynb](https://colab.research.google.com/drive/13YjxEnOQeMa6AQ_BRtL_uwXwTIQ3OqJQ?usp=sharing)|2日後の24:00
 6|6/22 or 6/25|[06.ipynb](https://colab.research.google.com/drive/1OBPkYbByDRZZiADH7MB1t8gh81PhW8T1?usp=sharing)|2日後の24:00
-7|6/29 or 7/2|[07.ipynb](https://colab.research.google.com/drive/12TQgzqZUQEI20Bw4oSLxrNNX9bM0h5Kv?usp=sharing)|**4日後の24:00**
-8|7/6 or 7/9|
+7|6/29 or 7/2|[07.ipynb](https://colab.research.google.com/drive/12TQgzqZUQEI20Bw4oSLxrNNX9bM0h5Kv?usp=sharing)|4日後の24:00
+8|7/6 or 7/9|[08.ipynb](https://colab.research.google.com/drive/1et_WQlx70y9qKF1p2JkeVMmBhr1XXLlq?usp=sharing)|**4日後の24:00**
 9|7/13 or 7/16|
 10|7/20 or 7/23|
 11|7/27 or 7/30|
