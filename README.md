@@ -42,8 +42,8 @@ iPadだけでも受講できると思いますが，PCを使うことを推奨�
 7|6/29 or 7/2|[07.ipynb](https://colab.research.google.com/drive/12TQgzqZUQEI20Bw4oSLxrNNX9bM0h5Kv?usp=sharing)|4日後の24:00
 8|7/6 or 7/9|[08.ipynb](https://colab.research.google.com/drive/1et_WQlx70y9qKF1p2JkeVMmBhr1XXLlq?usp=sharing)|4日後の24:00
 9|7/13 or 7/16|[09.ipynb](https://colab.research.google.com/drive/1CQqm-j8kgIfY5Fl57WN_6PSQuuwYUQf7?usp=sharing)|4日後の24:00
-10|7/20 or 7/23|[10.ipynb](https://colab.research.google.com/drive/18CyzZrfmmBqb4jW1cwCCwAFlQ6YZXwNe?usp=sharing)|**4日後の24:00**
-11|7/27 or 7/30|
+10|7/20 or 7/23|[10.ipynb](https://colab.research.google.com/drive/18CyzZrfmmBqb4jW1cwCCwAFlQ6YZXwNe?usp=sharing)|4日後の24:00
+11|7/27 or 7/30|[11.ipynb](https://colab.research.google.com/drive/1G3TBHqPvuvWdNaK1oIHIvzoV2_bH0iEB?usp=sharing)|**4日後の24:00**
 12|8/3 or 8/6|
 
 報告フォームで報告できないと，1回欠席ということになります．（もちろん，提出すればいいというものではありません．）
